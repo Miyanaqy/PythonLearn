@@ -1,6 +1,6 @@
 import urllib, urllib2
 
-url = 'http://www.server.com/login'
+url = 'http://passport.csdn.net/account/login'
 user_agent = 'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)'
 values = {'username': 'cqc', 'password' : 'XXXXX'}
 headers = {'User-Agent': user_agent}
