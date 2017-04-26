@@ -14,7 +14,7 @@ try:
 except urllib2.URLError,e:
     print e
 
-pattern = re.compile('<div class="upJyBoxCon".*?class="ujTitle">.*?<a .*?>(.*?)</a>',re.S)
+pattern = re.compile('<div class="upJyBoxCon".*?class="ujTitle">.*?<a href="(.*?)".*?>(.*?)</a>',re.S)
 items = re.findall(pattern, data)
 for item in items:
-    print item
+    print item[0],item[1]
