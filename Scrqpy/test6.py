@@ -15,16 +15,20 @@ class Scrqpy_mode:
     def wHTML(self, text, dir):
         code = chardet.detect(text)
         with open('%s/text.html' % dir,'w') as f:
-            f.write(text.decode('utf8').encode(code['encoding']))
+            print code['encoding']
+            try:
+                f.write(text.decode(code['encoding']).encode('gbk'))
+            except UnicodeError as e:
+                print e
+                f.write(text)
 
     def contentSave(self, data, dir):
-        pattern = re.compile('<img src="(.*?community)/(.*?).([p|P|j|J|g|G][n|N|p|P|i|I][g|G|f|F])"', re.S)
+        pattern = re.compile('<img src="(.*?community)/(.*?).([p|P|j|J|g|G][n|N|p|P|i|I][e|E|g|G|f|F][g|G]?)"', re.S)
         items = re.findall(pattern, data)
         imgurl = ''
         for item in items:
             local = os.path.join('%s/imgDir' % dir,'%s.%s' % (item[1], item[2]))
             url = item[0]+ '/' +item[1]+ '.' +item[2]
-            print url, local
             urllib.urlretrieve(url, local)
             imgurl = item[0]
         text = re.sub(imgurl, 'imgDir',data)
@@ -51,7 +55,6 @@ for int1 in range(1,20):
             items2 = re.findall(pattern2,data2)
             for item2 in items2:
                 print item2[0], item2[1], item2[2], item2[3], item2[5]
-                print item2[4]
                 scrq.contentSave(item2[4], '%s' % dir)
 
 
