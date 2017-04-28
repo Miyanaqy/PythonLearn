@@ -16,11 +16,8 @@ class Scrqpy_mode:
         code = chardet.detect(text)
         with open('%s/text.html' % dir,'w') as f:
             print code['encoding']
-            try:
-                f.write(text.decode(code['encoding']).encode('gbk'))
-            except UnicodeError as e:
-                print e
-                f.write(text)
+            f.write(text.decode(code['encoding', 'ignore']).encode('gbk', 'ignore'))
+            
 
     def contentSave(self, data, dir):
         pattern = re.compile('<img src="(.*?community)/(.*?).([p|P|j|J|g|G][n|N|p|P|i|I][e|E|g|G|f|F][g|G]?)"', re.S)
